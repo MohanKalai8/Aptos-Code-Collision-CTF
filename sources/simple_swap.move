@@ -202,6 +202,7 @@ module challenge::swap {
         assert!(challenge_status.is_solved, 2);
     }
 
+    // solution
     public entry fun solve(account: &signer, challenger: &signer) acquires Pool, ChallengeStatus, Faucet, Vault, Capabilities {
         // Initialize with challenger signer since it's the admin
         initialize(challenger);

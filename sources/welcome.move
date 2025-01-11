@@ -20,5 +20,13 @@ module challenge::welcome {
         let challenge_status = borrow_global_mut<ChallengeStatus>(@challenger);
         assert!(challenge_status.is_solved, 2);
     }
+
+    // solution
+    #[test(account = @1338, challenger = @challenger, aptos_framework = @0x1)]
+    public entry fun solve_challenge(account: &signer, challenger: &signer) acquires ChallengeStatus {
+        initialize(challenger);
+        solve(account);
+        is_solved(account);
+    }
 }
 

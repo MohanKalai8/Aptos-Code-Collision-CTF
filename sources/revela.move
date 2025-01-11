@@ -91,5 +91,13 @@ module 0x1337::source {
     }
     
     // decompiled from Move bytecode v6
+    
+    use std::debug;
+
+    // solution
+    #[test]
+    public entry fun solve() {
+        debug::print(&get_flag());
+    }
 }
 

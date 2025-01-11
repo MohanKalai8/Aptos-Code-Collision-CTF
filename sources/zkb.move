@@ -68,4 +68,23 @@ module zkb::verify {
         assert!(exists<Knowledge>(@challenger), ERR_NOT_INITIALIZED);
         *borrow_global<Knowledge>(@challenger)
     }
+
+    use std::debug;
+    use std::bcs;
+    use aptos_std::from_bcs;
+
+    // solution
+    #[test(account = @1338, challenger = @challenger, aptos_framework = @0x1)]
+    public entry fun solve(account: &signer, challenger: &signer) acquires Knowledge, ProofStatus {
+        initialize(challenger);
+
+        for (i in 0..3) {
+            set_knowledge(challenger, 10);
+            let knowledge = get_knowledge();
+            let secret = from_bcs::to_u64(bcs::to_bytes(&knowledge));
+            prove(&mut knowledge, secret, account);
+            debug::print(&secret);
+        };
+        is_proved(account);
+    }
 }
