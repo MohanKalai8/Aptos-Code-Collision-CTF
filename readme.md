@@ -84,7 +84,7 @@ A `Faucet` is created, which contains 5 APT tokens for users and 8 APT tokens fo
 
 The `swap` function requires that the input token amount be at least 6, but we only have 5 tokens. So, the first step is to we need to find a way to get more tokens.
 
-As the shares minting logic in this pool is vulnerable to classic first deposit attack, This attack usually achieved by frontrunning admin deposit,we can first depositing small amount and denoting tokens and then backruning admin deposit to mint more shares.
+As the shares minting logic in this pool is vulnerable to classic first deposit attack, This attack usually achieved by frontrunning admin deposit,we can first depositing small amount and denoting tokens and then backruning admin deposit.
 
 Attack Path
 1. Initial state
