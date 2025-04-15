@@ -38,8 +38,6 @@ In `initialize`, they are creating the `JBZ` token with `1337` supply and they a
 Uing `flash_loan()` one can take flash loan and repay using the `repay()` function. However the main issue lies in the `repay()` function does not checking if the returned `FungibleAsset` matches the amount borrwed through `flash_loan`. This allows one can borrow all the funds from the contract, and return a `FungibleAsset` with amont `0`.
 
 
-Here is the corrected version of your CTF writeup with grammatical errors fixed:
-
 ---
 
 ## SuperMario 16
